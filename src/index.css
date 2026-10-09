@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root {
+  margin: 0;
+  min-height: 100%;
+  min-height: 100vh;
+}
+
+body {
+  @apply bg-slate-100 text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-100;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+[contenteditable='true']:empty::before {
+  content: attr(data-placeholder);
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.shadow-soft {
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+}

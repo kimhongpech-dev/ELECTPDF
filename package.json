@@ -1,0 +1,86 @@
+{
+  "name": "pdf-mini-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A lightweight offline PDF utility for text-to-PDF and PDF splitting.",
+  "main": "dist-electron/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"vite --host 0.0.0.0\" \"wait-on http://127.0.0.1:5173 && tsc -p electron/tsconfig.json && electron .\"",
+    "build": "tsc -b && vite build && tsc -p electron/tsconfig.json",
+    "lint": "eslint . --ext .ts,.tsx --max-warnings 0",
+    "test": "vitest run",
+    "format": "prettier --write .",
+    "preview": "vite preview",
+    "package": "npm run build && electron-builder --dir",
+    "package:win": "npm run build && electron-builder --win",
+    "package:linux": "npm run build && electron-builder --linux AppImage"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.6.1",
+    "lucide-react": "^1.52.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^6.4.299",
+    "postcss": "^8.5.29",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwindcss": "^3.4.17",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@typescript-eslint/eslint-plugin": "^8.71.1",
+    "@typescript-eslint/parser": "^8.71.1",
+    "@vitejs/plugin-react": "^6.1.1",
+    "concurrently": "^9.2.0",
+    "electron": "^44.6.0",
+    "electron-builder": "^26.15.3",
+    "eslint": "^10.12.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "prettier": "^3.9.9",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^3.2.4",
+    "wait-on": "^9.5.1"
+  },
+  "build": {
+    "appId": "com.pdfminitools.desktop",
+    "productName": "PDF Mini Tools",
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "resources/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "build",
+      "output": "release"
+    },
+    "extraResources": [
+      {
+        "from": "resources/icon.png",
+        "to": "icon.png"
+      }
+    ],
+    "linux": {
+      "icon": "resources/icon.png",
+      "target": [
+        "AppImage"
+      ]
+    },
+    "win": {
+      "icon": "resources/icon.ico",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "installerIcon": "resources/icon.ico",
+      "uninstallerIcon": "resources/icon.ico"
+    }
+  }
+}
